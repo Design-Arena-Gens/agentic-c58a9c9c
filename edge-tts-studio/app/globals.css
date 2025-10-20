@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+:root {
+  /* Premium Design System - No Purple */
+  --graphite: #0B1220;
+  --slate-800: #1F2937;
+  --warm-teal: #15B2A0;
+  --warm-gold: #D4A76A;
+  --stone: #94A3B8;
+  --off-white: #F7F7F5;
+  --viridian: #20C997;
+  --amber: #FFB020;
+  --carmine: #E34B4B;
+
+  --background: var(--graphite);
+  --foreground: var(--off-white);
+  --surface: var(--slate-800);
+  --primary: var(--warm-teal);
+  --accent: var(--warm-gold);
+  --muted: var(--stone);
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15);
+
+  --gradient-hero: linear-gradient(135deg, #10202a 0%, #153d3a 40%, #0b1220 100%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-success: var(--viridian);
+  --color-warning: var(--amber);
+  --color-error: var(--carmine);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 700;
+}
+
+/* Motion tokens */
+.transition-short {
+  transition: all 160ms cubic-bezier(.2,.9,.2,1);
+}
+
+.transition-medium {
+  transition: all 320ms cubic-bezier(.2,.9,.2,1);
+}
+
+.transition-long {
+  transition: all 560ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Hero gradient */
+.hero-gradient {
+  background: var(--gradient-hero);
+}
+
+/* Skeleton loader shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    var(--surface) 0%,
+    rgba(148, 163, 184, 0.1) 50%,
+    var(--surface) 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Pulse animation for waveforms */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.shake {
+  animation: shake 0.4s cubic-bezier(.2,.9,.2,1);
+}
+
+/* Bounce animation for toasts */
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  50% {
+    transform: scale(1.02) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.bounce-in {
+  animation: bounce-in 320ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Card hover lift effect */
+.card-hover {
+  transition: transform 320ms cubic-bezier(.2,.9,.2,1),
+              box-shadow 320ms cubic-bezier(.2,.9,.2,1),
+              border-color 320ms cubic-bezier(.2,.9,.2,1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--warm-teal);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--graphite);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--slate-800);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--stone);
+}
+
+/* Progress bar glow */
+.progress-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(21, 178, 160, 0.3),
+    transparent
+  );
+  animation: progress-wave 2s infinite;
+}
+
+@keyframes progress-wave {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
